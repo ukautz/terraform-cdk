@@ -27,11 +27,19 @@ call npm init -y >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 exit /B 1
 set expanded_list=
 for /f %%f in ('dir /b /s "%CDKTF_DIST%\js\*.tgz" ^| sort /r') do call set expanded_list=%%expanded_list%% "%%f"
-npm install %expanded_list%
+echo "DEBUG: before npm install (%expanded_list%)"
+npm install --loglevel verbose
+echo "DEBUG: after npm install"
 IF %ERRORLEVEL% NEQ 0 exit /B 1
+echo "DEBUG: after exit check"
 set PATH=%staging%\node_modules\.bin;%PATH%
+echo "DEBUG: after set PATH"
 
 rem restore working directory
+echo "DEBUG: after rem"
 cd /D %cwd%
+echo "DEBUG: after cd"
 echo %~1
+echo "DEBUG: after echo"
 call %~1
+echo "DEBUG: after call / after all"
