@@ -28,7 +28,7 @@ IF %ERRORLEVEL% NEQ 0 exit /B 1
 set expanded_list=
 for /f %%f in ('dir /b /s "%CDKTF_DIST%\js\*.tgz" ^| sort /r') do call set expanded_list=%%expanded_list%% "%%f"
 echo "DEBUG: before npm install (%expanded_list%)"
-npm install --loglevel verbose
+npm install --loglevel verbose %expanded_list%
 echo "DEBUG: after npm install"
 IF %ERRORLEVEL% NEQ 0 exit /B 1
 echo "DEBUG: after exit check"
